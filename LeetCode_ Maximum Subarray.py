@@ -1,18 +1,46 @@
-def Maximumsum(s):
-    count = 0
-    finalresult = 0
+
+
+
+def MaximumsumWithk(s,k):
+    maximumva = float('-inf')
+    currentRunningSum =0
     for i in range(len(s)):
-        for j in range(i,len(s)+1):
-            subarry = s[i:j]
-            result = sum(subarry)
-            if result > count:
-                count = result
-    return count
+        currentRunningSum += s[i]
+
+        
+        if (i>=k-1):
+            print(i,k)
+            maximumva = max(maximumva,currentRunningSum)
+            print(maximumva)
+            currentRunningSum -= s[i-(k-1)]
+            print(currentRunningSum)
+
+    return maximumva    
+
+def MaximumSum(s):
+    maximumValue = float('-inf')
+    currentWindowSum = 0
+    WindowStart = 0
+    for windowend in range(len(s)):
+        currentWindowSum += s[windowend]   #sum
+        maximumValue = max(maximumValue,currentWindowSum)
+
+        while (currentWindowSum < 0):
+            currentWindowSum -=s[WindowStart]
+            
+            WindowStart += 1
+    return maximumValue
+
+
+    
+        
+    
 
 nums = [-2,1,-3,4,-1,2,1,-5,4]
+v = 3
 
-q = Maximumsum(nums)
+q = MaximumsumWithk(nums,v)
 
-print(q)
+print(MaximumSum(nums))
 
 
